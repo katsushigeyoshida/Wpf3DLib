@@ -1,3 +1,3 @@
 # Wpf3DLib
 
-OpenGL,OpenTK‚ð—p‚¢‚½ƒ‰ƒCƒuƒ‰ƒŠ
+OpenGL,OpenTKã‚’ç”¨ã„ãŸãƒ©ã‚¤ãƒ–ãƒ©ãƒª
