@@ -503,14 +503,14 @@ namespace Wpf3DLib
         /// <param name="position">三次元座標データ配列</param>
         public void drawSurfaceShape(Vector3[,] position)
         {
-            for (int i = 0; i < position.GetLength(0) - 1; i++) {
+            for (int y = 0; y < position.GetLength(0) - 1; y++) {
                 GL.Begin(PrimitiveType.QuadStrip);
-                for (int j = 0; j < position.GetLength(1); j++) {
-                    GL.Color4(val2color(position[i, j].Z, mColorMin, mColorMax));
-                    if (position[i, j] != null)
-                        GL.Vertex3(cnvPosition(position[i, j]));
-                    if (position[i + 1, j] != null)
-                        GL.Vertex3(cnvPosition(position[i + 1, j]));
+                for (int x = 0; x < position.GetLength(1); x++) {
+                    GL.Color4(val2color(position[y, x].Z, mColorMin, mColorMax));
+                    if (position[y, x] != null)
+                        GL.Vertex3(cnvPosition(position[y, x]));
+                    if (position[y + 1, x] != null)
+                        GL.Vertex3(cnvPosition(position[y + 1, x]));
                 }
                 GL.End();
             }
@@ -523,16 +523,39 @@ namespace Wpf3DLib
         /// <param name="position">三次元座標データ配列</param>
         public void drawSurfaceShape(Func<double, Color4> val2Color, Vector3[,] position)
         {
-            for (int i = 0; i < position.GetLength(0) - 1; i++) {
+            for (int y = 0; y < position.GetLength(0) - 1; y++) {
                 GL.Begin(PrimitiveType.QuadStrip);
-                for (int j = 0; j < position.GetLength(1); j++) {
-                    GL.Color4(val2Color(position[i, j].Z));
-                    if (position[i, j] != null)
-                        GL.Vertex3(cnvPosition(position[i, j]));
-                    if (position[i + 1, j] != null)
-                        GL.Vertex3(cnvPosition(position[i + 1, j]));
+                for (int x = 0; x < position.GetLength(1); x++) {
+                    GL.Color4(val2Color(position[y, x].Z));
+                    if (position[y, x] != null)
+                        GL.Vertex3(cnvPosition(position[y, x]));
+                    if (position[y + 1, x] != null)
+                        GL.Vertex3(cnvPosition(position[y + 1, x]));
                 }
                 GL.End();
+            }
+        }
+
+        public void drawSurfaceShape2(Func<double, Color4> val2Color, Vector3[,] position)
+        {
+            for (int y = 0; y < position.GetLength(0) - 1; y++) {
+                for (int x = 0; x < position.GetLength(1) - 1; x++) {
+                    //GL.Color4(val2Color(position[y, x].Z));
+                    GL.Material(MaterialFace.Front, MaterialParameter.Diffuse, val2Color(position[y, x].Z));
+                    GL.Begin(PrimitiveType.QuadStrip);
+                    {
+                        GL.Normal3(-Vector3.UnitY);
+                        if (position[y, x] != null)
+                            GL.Vertex3(cnvPosition(position[y, x]));
+                        if (position[y + 1, x] != null)
+                            GL.Vertex3(cnvPosition(position[y + 1, x]));
+                        if (position[y, x + 1] != null)
+                            GL.Vertex3(cnvPosition(position[y, x + 1]));
+                        if (position[y + 1, x + 1] != null)
+                            GL.Vertex3(cnvPosition(position[y + 1, x + 1]));
+                    }
+                    GL.End();
+                }
             }
         }
 
