@@ -34,7 +34,7 @@ namespace Wpf3DLib
         private FONTFACE mFontFace = FONTFACE.XZ;
 
         //  色
-        public Color4[] mColor4 = {
+        public static Color4[] mColor4 = {
             Color4.AliceBlue, Color4.AntiqueWhite, Color4.Aqua, Color4.Aquamarine, Color4.Azure,
             Color4.Beige, Color4.Bisque, Color4.Black, Color4.BlanchedAlmond, Color4.Blue,
             Color4.BlueViolet, Color4.Brown, Color4.BurlyWood, Color4.CadetBlue, Color4.Chartreuse,
@@ -65,7 +65,7 @@ namespace Wpf3DLib
             Color4.Violet, Color4.Wheat, Color4.White, Color4.WhiteSmoke, Color4.Yellow,
             Color4.YellowGreen
         };
-        public string[] mColor4Title = {
+        public static string[] mColor4Title = {
             "AliceBlue", "AntiqueWhite", "Aqua", "Aquamarine", "Azure",
             "Beige", "Bisque", "Black", "BlanchedAlmond", "Blue",
             "BlueViolet", "Brown", "BurlyWood", "CadetBlue", "Chartreuse",
@@ -156,9 +156,36 @@ namespace Wpf3DLib
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
-        public void initMove(float x, float y, float z)
+        public void translate(float x, float y, float z)
         {
             mRotate *= Matrix4.CreateTranslation(x, y, z);
+        }
+
+        /// <summary>
+        /// X軸で回転
+        /// </summary>
+        /// <param name="rot">回転角(rad)</param>
+        public void roatateX(float rot)
+        {
+            mRotate *= Matrix4.CreateRotationX(rot);
+        }
+
+        /// <summary>
+        /// Y軸で回転
+        /// </summary>
+        /// <param name="rot">回転角(rad)</param>
+        public void roatateY(float rot)
+        {
+            mRotate *= Matrix4.CreateRotationY(rot);
+        }
+
+        /// <summary>
+        /// Z軸で回転
+        /// </summary>
+        /// <param name="rot">回転角(rad)</param>
+        public void roatateZ(float rot)
+        {
+            mRotate *= Matrix4.CreateRotationZ(rot);
         }
 
         /// <summary>
